@@ -1,0 +1,3 @@
+%{"exjsx": {:hex, :exjsx, "3.2.0"},
+  "exos": {:git, "https://github.com/awetzel/exos.git", "f56bb3a11d78f07d773ca9cd40e46ef2f1cf5a8b", []},
+  "jsx": {:hex, :jsx, "2.6.2"}}
