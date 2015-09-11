@@ -37,51 +37,51 @@ defmodule LibbitcoinExplorerTest do
                 "outputs" => %{"output" => %{"address" => "35A4oqfcPkVxodAQ2oWhExchQuqHVfZe5w", "script" => "hash160 [ 2606041fb58c3e1f37d2920304b3587ba0907986 ] equal", "value" => "280000"}}, "version" => "1"}}
 
   test "address-decode" do
-    assert {:ok, @address_decoded} = E.address_decode(@hd_addr_m)
+    assert {:ok, @address_decoded} == E.address_decode(@hd_addr_m)
   end
 
   test "address-embed" do
-    assert {:ok, @address_embed} = E.address_embed(@hd_addr_m, 111)
+    assert {:ok, @address_embed} == E.address_embed(@hd_addr_m, 111)
   end
 
   test "address-encode" do
-    assert {:ok, @hd_addr_m} = E.address_encode(@address_ripe160, 0)
+    assert {:ok, @hd_addr_m} == E.address_encode(@address_ripe160, 0)
   end
 
   test "address-validate" do
-    assert {:ok, :valid} = E.address_validate(@hd_addr_m)
-    assert {:error, :invalid} = E.address_validate(@address_invalid)
+    assert {:ok, :valid} == E.address_validate(@hd_addr_m)
+    assert {:error, :invalid} == E.address_validate(@address_invalid)
   end
 
   test "base58-encode" do
-    assert {:ok, @base58} = E.base58_encode(@base58_str)
+    assert {:ok, @base58} == E.base58_encode(@base58_str)
   end
 
   test "base58-decode" do
-    assert {:ok, @base58_str} = E.base58_decode(@base58)
+    assert {:ok, @base58_str} == E.base58_decode(@base58)
   end
 
   test "base58check-encode" do
-    assert {:ok, @base58check_encoded} = E.base58check_encode(@base58_str, 42)
+    assert {:ok, @base58check_encoded} == E.base58check_encode(@base58_str, 42)
   end
 
   test "base58check-decode" do
-    assert {:ok, @base58check_decoded} = E.base58check_decode(@base58check_encoded)
+    assert {:ok, @base58check_decoded} == E.base58check_decode(@base58check_encoded)
   end
 
   test "bitcoin160" do
-    assert {:ok, @seed_bitcoin160} = E.bitcoin160(@hd_seed)
+    assert {:ok, @seed_bitcoin160} == E.bitcoin160(@hd_seed)
   end
   
   test "bitcoin256" do
-    assert {:ok, @seed_bitcoin256} = E.bitcoin256(@hd_seed)
+    assert {:ok, @seed_bitcoin256} == E.bitcoin256(@hd_seed)
   end
 
   test "btc-to-satoshi" do
-    assert {:ok, 100_000_000} = E.btc_to_satoshi(1)
-    assert {:ok, 110_000_000} = E.btc_to_satoshi(1.1)
-    assert {:ok, 100_000_000} = E.btc_to_satoshi("1")
-    assert {:ok, 110_000_000} = E.btc_to_satoshi("1.1")
+    assert {:ok, 100_000_000} == E.btc_to_satoshi(1)
+    assert {:ok, 110_000_000} == E.btc_to_satoshi(1.1)
+    assert {:ok, 100_000_000} == E.btc_to_satoshi("1")
+    assert {:ok, 110_000_000} == E.btc_to_satoshi("1.1")
   end
 
   test "hd-new" do
