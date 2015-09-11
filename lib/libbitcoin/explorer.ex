@@ -5,53 +5,52 @@ defmodule Libbitcoin.Explorer do
   @address_validate_valid_reply "The address is valid.\n"
   @address_validate_invalid_reply "The address is not valid.\n"
 
-
   def address_decode(address) do
-    handle_command("address-decode", [address], &json_reply(&1))
+    spawn_command("address-decode", [address], &json_reply(&1))
   end
 
   def address_embed(address, version) do
-    handle_command("address-embed", [address, "--version", version], &string_reply(&1))
+    spawn_command("address-embed", [address, "--version", version], &string_reply(&1))
   end
 
   def address_encode(ripe160, version) do
-    handle_command("address-encode", ["--ripe160", to_hex(ripe160), "--version", version], &string_reply(&1))
+    spawn_command("address-encode", ["--ripe160", to_hex(ripe160), "--version", version], &string_reply(&1))
   end
 
   def address_validate(address) do
-    handle_command("address-validate", [address], &string_reply(&1))
+    spawn_command("address-validate", [address], &string_reply(&1))
   end
 
   def base58_encode(str) do
-    handle_command("base58-encode", [to_hex(str)], &string_reply(&1))
+    spawn_command("base58-encode", [to_hex(str)], &string_reply(&1))
   end
 
   def base58_decode(str) do
-    handle_command("base58-decode", [str], &hex_reply(&1))
+    spawn_command("base58-decode", [str], &hex_reply(&1))
   end
 
   def base58check_encode(str, version) do
-    handle_command("base58check-encode", ['--base16', to_hex(str), '--version', version], &string_reply(&1))
+    spawn_command("base58check-encode", ['--base16', to_hex(str), '--version', version], &string_reply(&1))
   end
 
   def base58check_decode(str) do
-    handle_command("base58check-decode", [str], &json_reply(&1))
+    spawn_command("base58check-decode", [str], &json_reply(&1))
   end
 
   def bitcoin160(str) do
-    handle_command("bitcoin160", [to_hex(str)], &hex_reply(&1))
+    spawn_command("bitcoin160", [to_hex(str)], &hex_reply(&1))
   end
 
   def bitcoin256(str) do
-    handle_command("bitcoin256", [to_hex(str)], &hex_reply(&1))
+    spawn_command("bitcoin256", [to_hex(str)], &hex_reply(&1))
   end
 
   def btc_to_satoshi(btc) do
-    handle_command("btc-to-satoshi", [to_string(btc)], &integer_reply(&1))
+    spawn_command("btc-to-satoshi", [to_string(btc)], &integer_reply(&1))
   end
 
   def hd_new(seed) do
-    handle_command("hd-new", [to_hex(seed)], &string_reply(&1))
+    spawn_command("hd-new", [to_hex(seed)], &string_reply(&1))
   end
 
   def hd_private(xpriv, index, hard \\ false) do
@@ -61,7 +60,7 @@ defmodule Libbitcoin.Explorer do
       [xpriv, "--index", index]
     end
 
-    handle_command("hd-private", argv, &string_reply(&1))
+    spawn_command("hd-private", argv, &string_reply(&1))
   end
 
   def hd_public(xkey, index, hard \\ false) do
@@ -71,30 +70,30 @@ defmodule Libbitcoin.Explorer do
       [xkey, "--index", index]
     end
 
-    handle_command("hd-public", argv, &string_reply(&1))
+    spawn_command("hd-public", argv, &string_reply(&1))
   end
 
   def hd_to_address(xkey) do
-    handle_command("hd-to-address", [xkey], &string_reply(&1))
+    spawn_command("hd-to-address", [xkey], &string_reply(&1))
   end
 
   def hd_to_ec(xkey) do
-    handle_command("hd-to-ec", [xkey], &hex_reply(&1))
+    spawn_command("hd-to-ec", [xkey], &hex_reply(&1))
   end
 
   def hd_to_public(xkey) do
-    handle_command("hd-to-public", [xkey], &string_reply(&1))
+    spawn_command("hd-to-public", [xkey], &string_reply(&1))
   end
 
   def hd_to_wif(xkey) do
-    handle_command("hd-to-wif", [xkey], &string_reply(&1))
+    spawn_command("hd-to-wif", [xkey], &string_reply(&1))
   end
 
   def tx_decode(tx) do
-    handle_command("tx-decode", [to_hex(tx)], &json_reply(&1))
+    spawn_command("tx-decode", [to_hex(tx)], &json_reply(&1))
   end
 
-  def handle_command(command, argv, formatter \\ fn(reply) -> reply end) do
+  def spawn_command(command, argv, formatter \\ fn(reply) -> reply end) do
     open_port(command, argv) |> await_reply(formatter)
   end
 
