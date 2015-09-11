@@ -123,7 +123,7 @@ defmodule Libbitcoin.Explorer do
   end
 
   def format_command(command, argv) do
-    '/usr/local/bin/bx '
+    'bx '
       ++ to_char_list(command)
       ++ ' --format=json '
       ++ (argv |> Enum.join(" ") |> to_char_list)
