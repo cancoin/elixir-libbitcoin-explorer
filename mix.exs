@@ -7,7 +7,7 @@ defmodule Libbitcoin.Explorer.Mixfile do
      elixir: "~> 1.1-dev",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps(Mix.env)]
   end
 
   def application do
@@ -15,7 +15,10 @@ defmodule Libbitcoin.Explorer.Mixfile do
      mod: {Libbitcoin.Explorer.App, []}]
   end
 
-  defp deps do
+  defp deps(:bench) do
+    deps(:prod) ++ [{:benchfella, "~> 0.2.0"}]
+  end
+  defp deps(_) do
     [
       {:exjsx, "~> 3.2.0"}
     ]
