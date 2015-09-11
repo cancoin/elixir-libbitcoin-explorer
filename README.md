@@ -6,14 +6,19 @@ Simple port wrapper for [libbitcoin explorer](https://github.com/libbitcoin/libb
 
 Install [libbitcoin explorer](https://raw.githubusercontent.com/libbitcoin/libbitcoin-explorer/v2.1.0/install.sh) (bx)
 
-`curl -O https://raw.githubusercontent.com/libbitcoin/libbitcoin-explorer/v2.1.0/install.sh`
-`bash install.sh --build-boost --build-icu --prefix=/usr/local`
+```
+curl -O https://raw.githubusercontent.com/libbitcoin/libbitcoin-explorer/v2.1.0/install.sh
+bash install.sh --build-boost --build-icu --prefix=/usr/local
+```
 
-Fetch dependancies and run an Elixir console
+You must have libbitcoin-explorer (bx) in your PATH
 
-`mix deps.get`
-`iex -S mix`
+## Fetch dependancies and run an Elixir console
 
+```
+mix deps.get
+iex -S mix
+```
 
 ## Example
 
@@ -31,18 +36,19 @@ iex(1)> Libbitcoin.Explorer.address_decode("1HjFSwyWZrdwTXowHMHVc9E1uAHj2cSkvd")
 
 ## Supported commands
 
+```
 [✓] address-decode
 [✓] address-embed
 [✓] address-encode
 [✓] address-validate
-[N] base16-decode
-[N] base16-encode
+[x] base16-decode
+[x] base16-encode
 [✓] base58-decode
 [✓] base58-encode
 [✓] base58check-decode
 [✓] base58check-encode
-[N] base64-decode
-[N] base64-encode
+[x] base64-decode
+[x] base64-encode
 [✓] bitcoin160
 [✓] bitcoin256
 [✓] btc-to-satoshi
@@ -58,15 +64,15 @@ iex(1)> Libbitcoin.Explorer.address_decode("1HjFSwyWZrdwTXowHMHVc9E1uAHj2cSkvd")
 [ ] ec-to-public
 [ ] ec-to-wif
 [ ] ec-unlock
-[-] fetch-balance
-[-] fetch-header
-[-] fetch-height
-[-] fetch-history
-[-] fetch-public-key
-[-] fetch-stealth
-[-] fetch-tx
-[-] fetch-tx-index
-[-] fetch-utxo
+[x] fetch-balance
+[x] fetch-header
+[x] fetch-height
+[x] fetch-history
+[x] fetch-public-key
+[x] fetch-stealth
+[x] fetch-tx
+[x] fetch-tx-index
+[x] fetch-utxo
 [✓] hd-new
 [✓] hd-private
 [✓] hd-public
@@ -74,7 +80,7 @@ iex(1)> Libbitcoin.Explorer.address_decode("1HjFSwyWZrdwTXowHMHVc9E1uAHj2cSkvd")
 [✓] hd-to-ec
 [✓] hd-to-public
 [✓] hd-to-wif
-[-] help
+[x] help
 [ ] input-set
 [ ] input-sign
 [ ] input-validate
@@ -113,3 +119,4 @@ iex(1)> Libbitcoin.Explorer.address_decode("1HjFSwyWZrdwTXowHMHVc9E1uAHj2cSkvd")
 [ ] wif-to-public
 [ ] wrap-decode
 [ ] wrap-encode
+```
